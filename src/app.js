@@ -9,9 +9,14 @@ import cors from 'cors'
 import perfectExpressSanitizer from "perfect-express-sanitizer";
 import { logger } from "./utils/logger.js";
 import { errorHandler } from "./middleware/error.middleware.js";
-
+import authRoutes from "./routes/auth.route.js"
 
 export const app=express()
+
+if(process.env.NODE_ENV=="DEVELOPMENT"){
+app.use(morgan('dev'))
+
+}
 
 //global rate limiting
 const limiter=rateLimit({
@@ -51,11 +56,12 @@ app.use(
   })
 );
 
-if(process.env.NODE_ENV=="DEVELOPMENT"){
-app.use(morgan('dev'))
 
-}
 
+app.get('/health', (req, res) => {
+    res.status(200).send(" Auth-System is healthy");
+});
+app.use('/api/v1/auth', authRoutes);
 
 
 //404 route 

@@ -1,10 +1,10 @@
-import 'dotenv/config'; // Cleaner way to load env
 import { app } from "./src/app.js";
+import 'dotenv/config'; 
 import redis from './src/config/redis.js';
 import dbInstance from './src/config/db.js';
 import kafkaInstance from "./src/config/kafka.js";
 import { logger } from "./src/utils/logger.js";
-
+import runAuthConsumer from './src/workers/auth.worker.js';
 const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
@@ -18,9 +18,11 @@ const startServer = async () => {
     
         await kafkaInstance.connectProducer();
         logger.info('Infrastructure: Kafka Producer initialized');
+        await runAuthConsumer();
+        logger.info("Email Worker is active and waiting for events...");
 
         app.listen(PORT, () => {
-            logger.info(`🚀 Service ONLINE | Port: ${PORT} | Mode: ${process.env.NODE_ENV}`);
+            logger.info(`Service ONLINE | Port: ${PORT} | Mode: ${process.env.NODE_ENV}`);
         });
 
     } catch (error) {
