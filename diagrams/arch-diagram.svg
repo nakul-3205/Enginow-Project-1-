@@ -1,0 +1,536 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="680" viewBox="0 0 1400 680" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0e14"/>
+      <stop offset="100%" stop-color="#0f1219"/>
+    </linearGradient>
+    <linearGradient id="gGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00e5a0" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#00e5a0" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="gYellow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ff6b6b" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="gPurple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="gOrange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0.04"/>
+    </linearGradient>
+
+    <!-- Arrow markers -->
+    <marker id="aGreen" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#00e5a0"/>
+    </marker>
+    <marker id="aYellow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#ffd166"/>
+    </marker>
+    <marker id="aPurple" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#a78bfa"/>
+    </marker>
+    <marker id="aBlue" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#38bdf8"/>
+    </marker>
+    <marker id="aOrange" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#fb923c"/>
+    </marker>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="8" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Grid -->
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M 36 0 L 0 0 0 36" fill="none" stroke="#ffffff" stroke-width="0.4" stroke-opacity="0.04"/>
+    </pattern>
+  </defs>
+
+  <!-- ── BACKGROUND ── -->
+  <rect width="1400" height="680" fill="url(#bg)"/>
+  <rect width="1400" height="680" fill="url(#grid)"/>
+
+  <!-- Subtle glow orbs -->
+  <ellipse cx="700" cy="340" rx="500" ry="220" fill="#00e5a0" fill-opacity="0.025"/>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  TITLE BAR                                                 -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <rect x="16" y="14" width="1368" height="52" rx="10" fill="#13161e" stroke="#252836" stroke-width="1"/>
+  <rect x="16" y="14" width="1368" height="2.5" rx="2" fill="#00e5a0"/>
+
+  <rect x="32" y="24" width="160" height="16" rx="3" fill="none" stroke="#00e5a040" stroke-width="1"/>
+  <text x="112" y="36" text-anchor="middle" fill="#00e5a0" font-size="8.5" font-weight="700" letter-spacing="2.5">SYSTEM ARCHITECTURE</text>
+
+  <text x="212" y="47" fill="#ffffff" font-size="20" font-weight="800" letter-spacing="-0.5">User Auth Service</text>
+  <text x="430" y="47" fill="#00e5a0" font-size="20" font-weight="800" letter-spacing="-0.5">— Production Node.js Authentication</text>
+
+  <!-- Tech pills right side -->
+  <rect x="950" y="24" width="72" height="16" rx="8" fill="#00e5a01a" stroke="#00e5a030"/>
+  <text x="986" y="36" text-anchor="middle" fill="#00e5a0" font-size="9" font-weight="600">Node.js</text>
+  <rect x="1030" y="24" width="64" height="16" rx="8" fill="#ffd1661a" stroke="#ffd16630"/>
+  <text x="1062" y="36" text-anchor="middle" fill="#ffd166" font-size="9" font-weight="600">MongoDB</text>
+  <rect x="1102" y="24" width="50" height="16" rx="8" fill="#ff6b6b1a" stroke="#ff6b6b30"/>
+  <text x="1127" y="36" text-anchor="middle" fill="#ff6b6b" font-size="9" font-weight="600">Redis</text>
+  <rect x="1160" y="24" width="50" height="16" rx="8" fill="#a78bfa1a" stroke="#a78bfa30"/>
+  <text x="1185" y="36" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="600">Kafka</text>
+  <rect x="1218" y="24" width="42" height="16" rx="8" fill="#38bdf81a" stroke="#38bdf830"/>
+  <text x="1239" y="36" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="600">JWT</text>
+  <rect x="1268" y="24" width="56" height="16" rx="8" fill="#fb923c1a" stroke="#fb923c30"/>
+  <text x="1296" y="36" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="600">OpenAPI</text>
+  <rect x="1332" y="24" width="40" height="16" rx="8" fill="#00e5a01a" stroke="#00e5a030"/>
+  <text x="1352" y="36" text-anchor="middle" fill="#00e5a0" font-size="9" font-weight="600">OTP</text>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--                                                            -->
+  <!--   MAIN FLOW  (left → right)                               -->
+  <!--   Col X positions:  80 | 252 | 452 | 652 | 852 | 1090    -->
+  <!--                                                            -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+
+  <!-- ─────────────────────────────────────────────────────────
+       COLUMN 1 — CLIENT  (x=30, w=160)
+  ───────────────────────────────────────────────────────────── -->
+  <rect x="30" y="86" width="160" height="480" rx="12" fill="url(#gBlue)" stroke="#38bdf830" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="30" y="86" width="3" height="480" rx="2" fill="#38bdf8"/>
+
+  <text x="110" y="110" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="700" letter-spacing="1.5">CLIENT</text>
+  <line x1="44" y1="116" x2="176" y2="116" stroke="#38bdf820" stroke-width="1"/>
+
+  <!-- Client icon -->
+  <text x="110" y="160" text-anchor="middle" font-size="38">🌐</text>
+  <text x="110" y="190" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">Web / Mobile</text>
+  <text x="110" y="206" text-anchor="middle" fill="#8892a4" font-size="10">REST Consumer</text>
+
+  <rect x="50" y="218" width="120" height="18" rx="4" fill="#38bdf81a" stroke="#38bdf830"/>
+  <text x="110" y="231" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="600">HTTPS + CORS</text>
+
+  <rect x="50" y="242" width="120" height="18" rx="4" fill="#38bdf81a" stroke="#38bdf830"/>
+  <text x="110" y="255" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="600">Bearer Token</text>
+
+  <!-- API routes mini list -->
+  <line x1="44" y1="276" x2="176" y2="276" stroke="#38bdf815" stroke-width="1"/>
+  <text x="48" y="294" fill="#8892a4" font-size="9" font-weight="700" letter-spacing="1">API CALLS</text>
+
+  <rect x="48" y="300" width="36" height="14" rx="3" fill="#00e5a01a"/>
+  <text x="66" y="311" text-anchor="middle" fill="#00e5a0" font-size="8" font-weight="700">POST</text>
+  <text x="90" y="311" fill="#8892a4" font-size="9">/signup</text>
+
+  <rect x="48" y="318" width="36" height="14" rx="3" fill="#00e5a01a"/>
+  <text x="66" y="329" text-anchor="middle" fill="#00e5a0" font-size="8" font-weight="700">POST</text>
+  <text x="90" y="329" fill="#8892a4" font-size="9">/verify</text>
+
+  <rect x="48" y="336" width="36" height="14" rx="3" fill="#00e5a01a"/>
+  <text x="66" y="347" text-anchor="middle" fill="#00e5a0" font-size="8" font-weight="700">POST</text>
+  <text x="90" y="347" fill="#8892a4" font-size="9">/login</text>
+
+  <rect x="48" y="354" width="36" height="14" rx="3" fill="#38bdf81a"/>
+  <text x="66" y="365" text-anchor="middle" fill="#38bdf8" font-size="8" font-weight="700">GET</text>
+  <text x="90" y="365" fill="#8892a4" font-size="9">/me</text>
+
+  <rect x="48" y="372" width="36" height="14" rx="3" fill="#ffd1661a"/>
+  <text x="66" y="383" text-anchor="middle" fill="#ffd166" font-size="8" font-weight="700">PUT</text>
+  <text x="90" y="383" fill="#8892a4" font-size="9">/users/:id</text>
+
+  <rect x="48" y="390" width="36" height="14" rx="3" fill="#ff6b6b1a"/>
+  <text x="66" y="401" text-anchor="middle" fill="#ff6b6b" font-size="8" font-weight="700">DEL</text>
+  <text x="90" y="401" fill="#8892a4" font-size="9">/users/:id</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       ARROW 1→2
+  ───────────────────────────────────────────────────────────── -->
+  <line x1="190" y1="326" x2="228" y2="326" stroke="#38bdf8" stroke-width="1.8" marker-end="url(#aBlue)"/>
+  <text x="209" y="320" text-anchor="middle" fill="#38bdf8" font-size="8">HTTP</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       COLUMN 2 — SECURITY  (x=230, w=160)
+  ───────────────────────────────────────────────────────────── -->
+  <rect x="230" y="86" width="160" height="480" rx="12" fill="url(#gGreen)" stroke="#00e5a030" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="230" y="86" width="3" height="480" rx="2" fill="#00e5a0"/>
+
+  <text x="310" y="110" text-anchor="middle" fill="#00e5a0" font-size="11" font-weight="700" letter-spacing="1.5">SECURITY</text>
+  <line x1="244" y1="116" x2="376" y2="116" stroke="#00e5a020" stroke-width="1"/>
+
+  <!-- Rate Limiter -->
+  <rect x="246" y="126" width="128" height="60" rx="8" fill="#0d1117" stroke="#00e5a025" stroke-width="1"/>
+  <text x="262" y="146" font-size="15">🛡️</text>
+  <text x="282" y="145" fill="#ffffff" font-size="11" font-weight="700">Rate Limiter</text>
+  <text x="282" y="159" fill="#8892a4" font-size="9">100 req / 15 min</text>
+  <rect x="262" y="164" width="60" height="12" rx="3" fill="#00e5a01a"/>
+  <text x="292" y="173" text-anchor="middle" fill="#00e5a0" font-size="8" font-weight="600">GLOBAL</text>
+
+  <!-- Helmet -->
+  <rect x="246" y="198" width="128" height="60" rx="8" fill="#0d1117" stroke="#00e5a025" stroke-width="1"/>
+  <text x="262" y="218" font-size="15">🪖</text>
+  <text x="282" y="217" fill="#ffffff" font-size="11" font-weight="700">Helmet</text>
+  <text x="262" y="231" fill="#8892a4" font-size="9">Headers · CSP · XSS</text>
+  <rect x="262" y="236" width="62" height="12" rx="3" fill="#00e5a01a"/>
+  <text x="293" y="245" text-anchor="middle" fill="#00e5a0" font-size="8" font-weight="600">HEADERS</text>
+
+  <!-- HPP + Sanitizer -->
+  <rect x="246" y="270" width="128" height="60" rx="8" fill="#0d1117" stroke="#00e5a025" stroke-width="1"/>
+  <text x="262" y="290" font-size="15">🔒</text>
+  <text x="282" y="289" fill="#ffffff" font-size="11" font-weight="700">HPP + Sanitize</text>
+  <text x="262" y="303" fill="#8892a4" font-size="9">NoSQL · XSS · SQL</text>
+  <rect x="262" y="308" width="46" height="12" rx="3" fill="#00e5a01a"/>
+  <text x="285" y="317" text-anchor="middle" fill="#00e5a0" font-size="8" font-weight="600">INPUT</text>
+
+  <!-- CORS -->
+  <rect x="246" y="342" width="128" height="60" rx="8" fill="#0d1117" stroke="#00e5a025" stroke-width="1"/>
+  <text x="262" y="362" font-size="15">🌍</text>
+  <text x="282" y="361" fill="#ffffff" font-size="11" font-weight="700">CORS</text>
+  <text x="262" y="375" fill="#8892a4" font-size="9">Origin whitelist</text>
+  <rect x="262" y="380" width="54" height="12" rx="3" fill="#00e5a01a"/>
+  <text x="289" y="389" text-anchor="middle" fill="#00e5a0" font-size="8" font-weight="600">ORIGIN</text>
+
+  <!-- Morgan / Logger -->
+  <rect x="246" y="414" width="128" height="60" rx="8" fill="#0d1117" stroke="#00e5a025" stroke-width="1"/>
+  <text x="262" y="434" font-size="15">📋</text>
+  <text x="282" y="433" fill="#ffffff" font-size="11" font-weight="700">Morgan + Pino</text>
+  <text x="262" y="447" fill="#8892a4" font-size="9">Request logging</text>
+  <rect x="262" y="452" width="46" height="12" rx="3" fill="#00e5a01a"/>
+  <text x="285" y="461" text-anchor="middle" fill="#00e5a0" font-size="8" font-weight="600">LOGS</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       ARROW 2→3
+  ───────────────────────────────────────────────────────────── -->
+  <line x1="390" y1="326" x2="428" y2="326" stroke="#00e5a0" stroke-width="1.8" marker-end="url(#aGreen)"/>
+  <text x="409" y="320" text-anchor="middle" fill="#00e5a0" font-size="8">PASS</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       COLUMN 3 — ROUTES + MIDDLEWARE  (x=430, w=160)
+  ───────────────────────────────────────────────────────────── -->
+  <rect x="430" y="86" width="160" height="480" rx="12" fill="url(#gPurple)" stroke="#a78bfa30" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="430" y="86" width="3" height="480" rx="2" fill="#a78bfa"/>
+
+  <text x="510" y="110" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="700" letter-spacing="1.5">ROUTES</text>
+  <line x1="444" y1="116" x2="576" y2="116" stroke="#a78bfa20" stroke-width="1"/>
+
+  <!-- Auth Routes -->
+  <rect x="446" y="126" width="128" height="50" rx="8" fill="#0d1117" stroke="#a78bfa25" stroke-width="1"/>
+  <text x="462" y="144" font-size="13">🛤️</text>
+  <text x="480" y="143" fill="#ffffff" font-size="10" font-weight="700">Auth Routes</text>
+  <text x="462" y="158" fill="#8892a4" font-size="9">/api/v1/auth/*</text>
+  <rect x="462" y="162" width="72" height="11" rx="3" fill="#a78bfa1a"/>
+  <text x="498" y="171" text-anchor="middle" fill="#a78bfa" font-size="8" font-weight="600">ROUTER</text>
+
+  <!-- Auth Middleware protect -->
+  <rect x="446" y="188" width="128" height="60" rx="8" fill="#0d1117" stroke="#a78bfa25" stroke-width="1"/>
+  <text x="462" y="208" font-size="13">🔐</text>
+  <text x="480" y="207" fill="#ffffff" font-size="10" font-weight="700">protect()</text>
+  <text x="462" y="221" fill="#8892a4" font-size="9">Verify Bearer JWT</text>
+  <text x="462" y="233" fill="#8892a4" font-size="9">Attach req.user</text>
+  <rect x="462" y="237" width="60" height="11" rx="3" fill="#a78bfa1a"/>
+  <text x="492" y="246" text-anchor="middle" fill="#a78bfa" font-size="8" font-weight="600">MIDDLEWARE</text>
+
+  <!-- adminOnly -->
+  <rect x="446" y="260" width="128" height="60" rx="8" fill="#0d1117" stroke="#ff6b6b25" stroke-width="1"/>
+  <text x="462" y="280" font-size="13">👑</text>
+  <text x="480" y="279" fill="#ffffff" font-size="10" font-weight="700">adminOnly()</text>
+  <text x="462" y="293" fill="#8892a4" font-size="9">role === 'admin'</text>
+  <text x="462" y="305" fill="#8892a4" font-size="9">403 if denied</text>
+  <rect x="462" y="309" width="46" height="11" rx="3" fill="#ff6b6b1a"/>
+  <text x="485" y="318" text-anchor="middle" fill="#ff6b6b" font-size="8" font-weight="600">GUARD</text>
+
+  <!-- asyncHandler -->
+  <rect x="446" y="332" width="128" height="60" rx="8" fill="#0d1117" stroke="#a78bfa25" stroke-width="1"/>
+  <text x="462" y="352" font-size="13">⚙️</text>
+  <text x="480" y="351" fill="#ffffff" font-size="10" font-weight="700">asyncHandler</text>
+  <text x="462" y="365" fill="#8892a4" font-size="9">Error catch wrapper</text>
+  <text x="462" y="377" fill="#8892a4" font-size="9">→ errorHandler</text>
+  <rect x="462" y="381" width="62" height="11" rx="3" fill="#a78bfa1a"/>
+  <text x="493" y="390" text-anchor="middle" fill="#a78bfa" font-size="8" font-weight="600">WRAPPER</text>
+
+  <!-- ApiResponse / ApiError -->
+  <rect x="446" y="404" width="128" height="60" rx="8" fill="#0d1117" stroke="#a78bfa25" stroke-width="1"/>
+  <text x="462" y="424" font-size="13">📦</text>
+  <text x="480" y="423" fill="#ffffff" font-size="10" font-weight="700">ApiResponse</text>
+  <text x="462" y="437" fill="#8892a4" font-size="9">Standardised JSON</text>
+  <text x="462" y="449" fill="#8892a4" font-size="9">ApiError + handler</text>
+  <rect x="462" y="453" width="58" height="11" rx="3" fill="#a78bfa1a"/>
+  <text x="491" y="462" text-anchor="middle" fill="#a78bfa" font-size="8" font-weight="600">RESPONSE</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       ARROW 3→4
+  ───────────────────────────────────────────────────────────── -->
+  <line x1="590" y1="326" x2="628" y2="326" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#aPurple)"/>
+  <text x="609" y="320" text-anchor="middle" fill="#a78bfa" font-size="8">CALL</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       COLUMN 4 — CONTROLLER + UTILS  (x=630, w=180)
+  ───────────────────────────────────────────────────────────── -->
+  <rect x="630" y="86" width="180" height="480" rx="12" fill="url(#gYellow)" stroke="#ffd16630" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="630" y="86" width="3" height="480" rx="2" fill="#ffd166"/>
+
+  <text x="720" y="110" text-anchor="middle" fill="#ffd166" font-size="11" font-weight="700" letter-spacing="1.5">CONTROLLER</text>
+  <line x1="644" y1="116" x2="796" y2="116" stroke="#ffd16620" stroke-width="1"/>
+
+  <!-- Auth Controller -->
+  <rect x="646" y="126" width="148" height="80" rx="8" fill="#0d1117" stroke="#ffd16630" stroke-width="1"/>
+  <text x="662" y="146" font-size="13">🎮</text>
+  <text x="682" y="145" fill="#ffffff" font-size="11" font-weight="700">AuthController</text>
+  <text x="652" y="161" fill="#8892a4" font-size="9">signup  ·  verify  ·  login</text>
+  <text x="652" y="174" fill="#8892a4" font-size="9">logout  ·  refresh  ·  /me</text>
+  <text x="652" y="187" fill="#8892a4" font-size="9">listUsers  ·  update  ·  remove</text>
+  <rect x="662" y="193" width="76" height="11" rx="3" fill="#ffd1661a"/>
+  <text x="700" y="202" text-anchor="middle" fill="#ffd166" font-size="8" font-weight="600">BUSINESS LOGIC</text>
+
+  <!-- Token Utils -->
+  <rect x="646" y="218" width="148" height="56" rx="8" fill="#0d1117" stroke="#ffd16625" stroke-width="1"/>
+  <text x="662" y="237" font-size="13">🪙</text>
+  <text x="682" y="236" fill="#ffffff" font-size="11" font-weight="700">Token Utils</text>
+  <text x="652" y="251" fill="#8892a4" font-size="9">Access JWT (short TTL)</text>
+  <text x="652" y="263" fill="#8892a4" font-size="9">Refresh JWT (7 days)</text>
+  <rect x="662" y="267" width="40" height="11" rx="3" fill="#ffd1661a"/>
+  <text x="682" y="276" text-anchor="middle" fill="#ffd166" font-size="8" font-weight="600">JWT</text>
+
+  <!-- OTP Utils -->
+  <rect x="646" y="286" width="148" height="56" rx="8" fill="#0d1117" stroke="#ffd16625" stroke-width="1"/>
+  <text x="662" y="305" font-size="13">🔢</text>
+  <text x="682" y="304" fill="#ffffff" font-size="11" font-weight="700">OTP Utils</text>
+  <text x="652" y="319" fill="#8892a4" font-size="9">Generate + store in Redis</text>
+  <text x="652" y="331" fill="#8892a4" font-size="9">Verify with TTL expiry</text>
+  <rect x="662" y="335" width="62" height="11" rx="3" fill="#ffd1661a"/>
+  <text x="693" y="344" text-anchor="middle" fill="#ffd166" font-size="8" font-weight="600">6-DIGIT OTP</text>
+
+  <!-- Mail Utils -->
+  <rect x="646" y="354" width="148" height="56" rx="8" fill="#0d1117" stroke="#ffd16625" stroke-width="1"/>
+  <text x="662" y="373" font-size="13">📬</text>
+  <text x="682" y="372" fill="#ffffff" font-size="11" font-weight="700">Mail Utils</text>
+  <text x="652" y="387" fill="#8892a4" font-size="9">sendOTPEmail (direct)</text>
+  <text x="652" y="399" fill="#8892a4" font-size="9">sendWelcome (via Kafka)</text>
+  <rect x="662" y="403" width="72" height="11" rx="3" fill="#ffd1661a"/>
+  <text x="698" y="412" text-anchor="middle" fill="#ffd166" font-size="8" font-weight="600">NODEMAILER</text>
+
+  <!-- User Model -->
+  <rect x="646" y="422" width="148" height="56" rx="8" fill="#0d1117" stroke="#ffd16625" stroke-width="1"/>
+  <text x="662" y="441" font-size="13">👤</text>
+  <text x="682" y="440" fill="#ffffff" font-size="11" font-weight="700">User Model</text>
+  <text x="652" y="455" fill="#8892a4" font-size="9">username · email · pw</text>
+  <text x="652" y="467" fill="#8892a4" font-size="9">isVerified · role · timestamps</text>
+  <rect x="662" y="471" width="58" height="11" rx="3" fill="#ffd1661a"/>
+  <text x="691" y="480" text-anchor="middle" fill="#ffd166" font-size="8" font-weight="600">MONGOOSE</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       ARROWS 4→5 (three separate lines to MongoDB/Redis/Kafka)
+  ───────────────────────────────────────────────────────────── -->
+  <!-- Main arrow to infra column -->
+  <line x1="810" y1="280" x2="848" y2="280" stroke="#ffd166" stroke-width="1.8" marker-end="url(#aYellow)"/>
+  <text x="829" y="274" text-anchor="middle" fill="#ffd166" font-size="8">R/W</text>
+
+  <line x1="810" y1="370" x2="848" y2="370" stroke="#ffd166" stroke-width="1.8" marker-end="url(#aYellow)"/>
+
+  <line x1="810" y1="460" x2="848" y2="460" stroke="#a78bfa" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#aPurple)"/>
+  <text x="829" y="454" text-anchor="middle" fill="#a78bfa" font-size="8">EVENT</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       COLUMN 5 — INFRASTRUCTURE  (x=850, w=180)
+  ───────────────────────────────────────────────────────────── -->
+  <rect x="850" y="86" width="180" height="480" rx="12" fill="#13161e" stroke="#252836" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="850" y="86" width="3" height="480" rx="2" fill="#6b7280"/>
+
+  <text x="940" y="110" text-anchor="middle" fill="#9ca3af" font-size="11" font-weight="700" letter-spacing="1.5">INFRA</text>
+  <line x1="864" y1="116" x2="1016" y2="116" stroke="#ffffff10" stroke-width="1"/>
+
+  <!-- MongoDB -->
+  <rect x="866" y="126" width="148" height="80" rx="8" fill="#0d1117" stroke="#ffd16630" stroke-width="1"/>
+  <rect x="866" y="126" width="148" height="2.5" rx="2" fill="#ffd166"/>
+  <text x="882" y="150" font-size="16">🍃</text>
+  <text x="906" y="149" fill="#ffffff" font-size="12" font-weight="700">MongoDB</text>
+  <text x="872" y="165" fill="#8892a4" font-size="9">User collection · pool 50</text>
+  <text x="872" y="178" fill="#8892a4" font-size="9">Auto-reconnect (×5 retries)</text>
+  <rect x="882" y="183" width="52" height="12" rx="3" fill="#ffd1661a"/>
+  <text x="908" y="192" text-anchor="middle" fill="#ffd166" font-size="8" font-weight="600">MONGOOSE</text>
+
+  <!-- Redis -->
+  <rect x="866" y="222" width="148" height="90" rx="8" fill="#0d1117" stroke="#ff6b6b30" stroke-width="1"/>
+  <rect x="866" y="222" width="148" height="2.5" rx="2" fill="#ff6b6b"/>
+  <text x="882" y="248" font-size="16">⚡</text>
+  <text x="906" y="247" fill="#ffffff" font-size="12" font-weight="700">Redis</text>
+  <text x="872" y="263" fill="#8892a4" font-size="9">refresh:{userId} tokens</text>
+  <text x="872" y="276" fill="#8892a4" font-size="9">OTP codes (TTL)</text>
+  <text x="872" y="289" fill="#8892a4" font-size="9">users_list cache (180s)</text>
+  <rect x="882" y="295" width="46" height="12" rx="3" fill="#ff6b6b1a"/>
+  <text x="905" y="304" text-anchor="middle" fill="#ff6b6b" font-size="8" font-weight="600">IOREDIS</text>
+
+  <!-- Kafka Producer -->
+  <rect x="866" y="328" width="148" height="80" rx="8" fill="#0d1117" stroke="#a78bfa30" stroke-width="1"/>
+  <rect x="866" y="328" width="148" height="2.5" rx="2" fill="#a78bfa"/>
+  <text x="882" y="352" font-size="16">🔀</text>
+  <text x="906" y="351" fill="#ffffff" font-size="12" font-weight="700">Kafka</text>
+  <text x="872" y="367" fill="#8892a4" font-size="9">Producer → auth-events</text>
+  <text x="872" y="380" fill="#8892a4" font-size="9">SSL/TLS · idempotent</text>
+  <rect x="882" y="386" width="54" height="12" rx="3" fill="#a78bfa1a"/>
+  <text x="909" y="395" text-anchor="middle" fill="#a78bfa" font-size="8" font-weight="600">KAFKAJS</text>
+
+  <!-- Swagger Docs -->
+  <rect x="866" y="424" width="148" height="64" rx="8" fill="#0d1117" stroke="#fb923c30" stroke-width="1"/>
+  <rect x="866" y="424" width="148" height="2.5" rx="2" fill="#fb923c"/>
+  <text x="882" y="448" font-size="16">📖</text>
+  <text x="906" y="447" fill="#ffffff" font-size="12" font-weight="700">Swagger UI</text>
+  <text x="872" y="463" fill="#8892a4" font-size="9">/api-docs · OpenAPI YAML</text>
+  <rect x="882" y="472" width="58" height="12" rx="3" fill="#fb923c1a"/>
+  <text x="911" y="481" text-anchor="middle" fill="#fb923c" font-size="8" font-weight="600">OPENAPI</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       ARROW Kafka → Worker (rightward)
+  ───────────────────────────────────────────────────────────── -->
+  <line x1="1014" y1="368" x2="1060" y2="368" stroke="#a78bfa" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#aPurple)"/>
+  <text x="1037" y="362" text-anchor="middle" fill="#a78bfa" font-size="8">CONSUME</text>
+
+  <!-- ─────────────────────────────────────────────────────────
+       COLUMN 6 — WORKER + EMAIL  (x=1062, w=180)
+  ───────────────────────────────────────────────────────────── -->
+  <rect x="1062" y="86" width="180" height="480" rx="12" fill="url(#gOrange)" stroke="#fb923c30" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="1062" y="86" width="3" height="480" rx="2" fill="#fb923c"/>
+
+  <text x="1152" y="110" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="700" letter-spacing="1.5">WORKER</text>
+  <line x1="1076" y1="116" x2="1228" y2="116" stroke="#fb923c20" stroke-width="1"/>
+
+  <!-- Auth Worker -->
+  <rect x="1078" y="126" width="148" height="90" rx="8" fill="#0d1117" stroke="#fb923c25" stroke-width="1"/>
+  <text x="1094" y="151" font-size="16">📭</text>
+  <text x="1118" y="150" fill="#ffffff" font-size="11" font-weight="700">Auth Worker</text>
+  <text x="1084" y="166" fill="#8892a4" font-size="9">Consumer: auth-events</text>
+  <text x="1084" y="179" fill="#8892a4" font-size="9">group: auth-service-group</text>
+  <text x="1084" y="192" fill="#8892a4" font-size="9">SEND_WELCOME_EMAIL</text>
+  <rect x="1094" y="198" width="60" height="12" rx="3" fill="#fb923c1a"/>
+  <text x="1124" y="207" text-anchor="middle" fill="#fb923c" font-size="8" font-weight="600">CONSUMER</text>
+
+  <!-- Welcome Email -->
+  <rect x="1078" y="232" width="148" height="70" rx="8" fill="#0d1117" stroke="#fb923c25" stroke-width="1"/>
+  <text x="1094" y="254" font-size="16">✉️</text>
+  <text x="1118" y="253" fill="#ffffff" font-size="11" font-weight="700">Welcome Email</text>
+  <text x="1084" y="269" fill="#8892a4" font-size="9">Async · fully decoupled</text>
+  <text x="1084" y="282" fill="#8892a4" font-size="9">Nodemailer SMTP</text>
+  <rect x="1094" y="287" width="64" height="12" rx="3" fill="#fb923c1a"/>
+  <text x="1126" y="296" text-anchor="middle" fill="#fb923c" font-size="8" font-weight="600">ASYNC MAIL</text>
+
+  <!-- OTP Email (direct) -->
+  <rect x="1078" y="318" width="148" height="70" rx="8" fill="#0d1117" stroke="#fb923c25" stroke-width="1"/>
+  <text x="1094" y="340" font-size="16">🔑</text>
+  <text x="1118" y="339" fill="#ffffff" font-size="11" font-weight="700">OTP Email</text>
+  <text x="1084" y="355" fill="#8892a4" font-size="9">Direct SMTP on signup</text>
+  <text x="1084" y="368" fill="#8892a4" font-size="9">6-digit code + expiry</text>
+  <rect x="1094" y="373" width="64" height="12" rx="3" fill="#fb923c1a"/>
+  <text x="1126" y="382" text-anchor="middle" fill="#fb923c" font-size="8" font-weight="600">SYNC MAIL</text>
+
+  <!-- bcrypt note -->
+  <rect x="1078" y="404" width="148" height="70" rx="8" fill="#0d1117" stroke="#fb923c25" stroke-width="1"/>
+  <text x="1094" y="426" font-size="16">🔐</text>
+  <text x="1118" y="425" fill="#ffffff" font-size="11" font-weight="700">Password Hash</text>
+  <text x="1084" y="441" fill="#8892a4" font-size="9">bcryptjs pre-save hook</text>
+  <text x="1084" y="454" fill="#8892a4" font-size="9">salt rounds: 10</text>
+  <rect x="1094" y="459" width="54" height="12" rx="3" fill="#fb923c1a"/>
+  <text x="1121" y="468" text-anchor="middle" fill="#fb923c" font-size="8" font-weight="600">BCRYPT</text>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  FLOW STEPS BAR at bottom                                  -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <rect x="16" y="582" width="1368" height="82" rx="10" fill="#13161e" stroke="#252836" stroke-width="1"/>
+  <rect x="16" y="582" width="1368" height="2" rx="2" fill="#252836"/>
+
+  <text x="36" y="600" fill="#6b7280" font-size="9" font-weight="700" letter-spacing="1.5">AUTH FLOW</text>
+
+  <!-- Step circles + text -->
+  <!-- 1 -->
+  <circle cx="80" cy="632" r="14" fill="#00e5a01a" stroke="#00e5a040" stroke-width="1.5"/>
+  <text x="80" y="636" text-anchor="middle" fill="#00e5a0" font-size="11" font-weight="800">1</text>
+  <text x="80" y="655" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">POST /signup</text>
+  <text x="80" y="666" text-anchor="middle" fill="#6b7280" font-size="8">Register + OTP email</text>
+
+  <line x1="110" y1="632" x2="138" y2="632" stroke="#00e5a050" stroke-width="1.2" marker-end="url(#aGreen)"/>
+
+  <!-- 2 -->
+  <circle cx="162" cy="632" r="14" fill="#00e5a01a" stroke="#00e5a040" stroke-width="1.5"/>
+  <text x="162" y="636" text-anchor="middle" fill="#00e5a0" font-size="11" font-weight="800">2</text>
+  <text x="162" y="655" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">POST /verify</text>
+  <text x="162" y="666" text-anchor="middle" fill="#6b7280" font-size="8">OTP → isVerified=true</text>
+
+  <line x1="192" y1="632" x2="220" y2="632" stroke="#a78bfa50" stroke-width="1.2" stroke-dasharray="4 2" marker-end="url(#aPurple)"/>
+
+  <!-- 3 -->
+  <circle cx="244" cy="632" r="14" fill="#a78bfa1a" stroke="#a78bfa40" stroke-width="1.5"/>
+  <text x="244" y="636" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="800">3</text>
+  <text x="244" y="655" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">Kafka Event</text>
+  <text x="244" y="666" text-anchor="middle" fill="#6b7280" font-size="8">SEND_WELCOME_EMAIL</text>
+
+  <line x1="274" y1="632" x2="302" y2="632" stroke="#fb923c50" stroke-width="1.2" marker-end="url(#aOrange)"/>
+
+  <!-- 4 -->
+  <circle cx="326" cy="632" r="14" fill="#fb923c1a" stroke="#fb923c40" stroke-width="1.5"/>
+  <text x="326" y="636" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="800">4</text>
+  <text x="326" y="655" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">Auth Worker</text>
+  <text x="326" y="666" text-anchor="middle" fill="#6b7280" font-size="8">Async welcome email</text>
+
+  <line x1="356" y1="632" x2="384" y2="632" stroke="#ffd16650" stroke-width="1.2" marker-end="url(#aYellow)"/>
+
+  <!-- 5 -->
+  <circle cx="408" cy="632" r="14" fill="#ffd1661a" stroke="#ffd16640" stroke-width="1.5"/>
+  <text x="408" y="636" text-anchor="middle" fill="#ffd166" font-size="11" font-weight="800">5</text>
+  <text x="408" y="655" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">POST /login</text>
+  <text x="408" y="666" text-anchor="middle" fill="#6b7280" font-size="8">bcrypt + issue JWT pair</text>
+
+  <line x1="438" y1="632" x2="466" y2="632" stroke="#ffd16650" stroke-width="1.2" marker-end="url(#aYellow)"/>
+
+  <!-- 6 -->
+  <circle cx="490" cy="632" r="14" fill="#ffd1661a" stroke="#ffd16640" stroke-width="1.5"/>
+  <text x="490" y="636" text-anchor="middle" fill="#ffd166" font-size="11" font-weight="800">6</text>
+  <text x="490" y="655" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">Redis Store</text>
+  <text x="490" y="666" text-anchor="middle" fill="#6b7280" font-size="8">refresh:{id} → 7 days</text>
+
+  <line x1="520" y1="632" x2="548" y2="632" stroke="#38bdf850" stroke-width="1.2" marker-end="url(#aBlue)"/>
+
+  <!-- 7 -->
+  <circle cx="572" cy="632" r="14" fill="#38bdf81a" stroke="#38bdf840" stroke-width="1.5"/>
+  <text x="572" y="636" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="800">7</text>
+  <text x="572" y="655" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">protect()</text>
+  <text x="572" y="666" text-anchor="middle" fill="#6b7280" font-size="8">JWT verify on each req</text>
+
+  <line x1="602" y1="632" x2="630" y2="632" stroke="#38bdf850" stroke-width="1.2" marker-end="url(#aBlue)"/>
+
+  <!-- 8 -->
+  <circle cx="654" cy="632" r="14" fill="#38bdf81a" stroke="#38bdf840" stroke-width="1.5"/>
+  <text x="654" y="636" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="800">8</text>
+  <text x="654" y="655" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">POST /refresh</text>
+  <text x="654" y="666" text-anchor="middle" fill="#6b7280" font-size="8">Validate + rotate tokens</text>
+
+  <line x1="684" y1="632" x2="712" y2="632" stroke="#ff6b6b50" stroke-width="1.2" marker-end="url(#aBlue)"/>
+
+  <!-- 9 -->
+  <circle cx="736" cy="632" r="14" fill="#ff6b6b1a" stroke="#ff6b6b40" stroke-width="1.5"/>
+  <text x="736" y="636" text-anchor="middle" fill="#ff6b6b" font-size="11" font-weight="800">9</text>
+  <text x="736" y="655" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700">POST /logout</text>
+  <text x="736" y="666" text-anchor="middle" fill="#6b7280" font-size="8">DEL refresh:{id} Redis</text>
+
+  <!-- LEGEND -->
+  <line x1="900" y1="610" x2="934" y2="610" stroke="#00e5a0" stroke-width="1.5" marker-end="url(#aGreen)"/>
+  <text x="940" y="614" fill="#6b7280" font-size="9">HTTP / REST</text>
+
+  <line x1="900" y1="628" x2="934" y2="628" stroke="#ffd166" stroke-width="1.5" stroke-dasharray="0" marker-end="url(#aYellow)"/>
+  <text x="940" y="632" fill="#6b7280" font-size="9">Cache Read/Write</text>
+
+  <line x1="900" y1="646" x2="934" y2="646" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#aPurple)"/>
+  <text x="940" y="650" fill="#6b7280" font-size="9">Kafka Event (async)</text>
+
+  <line x1="1060" y1="628" x2="1094" y2="628" stroke="#fb923c" stroke-width="1.5" marker-end="url(#aOrange)"/>
+  <text x="1100" y="632" fill="#6b7280" font-size="9">Email Dispatch</text>
+
+  <!-- copyright / footer -->
+  <text x="1380" y="658" text-anchor="end" fill="#252836" font-size="9" font-family="monospace">User Authentication System — Node.js + MongoDB + Redis + Kafka</text>
+
+</svg>
