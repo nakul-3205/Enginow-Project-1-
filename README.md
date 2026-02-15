@@ -35,8 +35,9 @@ A robust, production-ready authentication and user management system built with 
 
 - **Monitoring & Logging**
   - Structured logging with Pino
-  - Logtail integration for centralized logging
+  - BetterStack (Logtail) integration for centralized logging
   - Health check endpoint
+  - Real-time log streaming and monitoring
 
 ## 📋 Table of Contents
 
@@ -110,8 +111,8 @@ ADMIN_SIGNUP_SECRET=your_admin_secret_key_here
 # Client Configuration
 CLIENT_URL=http://localhost:5173
 
-# Logging (Optional)
-LOGTAIL_SOURCE_TOKEN=your_logtail_token_here
+# Logging (BetterStack - Optional)
+LOGTAIL_SOURCE_TOKEN=your_betterstack_source_token_here
 ```
 
 4. **Start required services**
@@ -484,7 +485,7 @@ Enginow-Project-1-/
 ### Logging & Monitoring
 - **pino** - Fast JSON logger
 - **pino-pretty** - Pretty print for development
-- **@logtail/pino** - Logtail integration
+- **@logtail/pino** - BetterStack (Logtail) integration for centralized logging
 - **morgan** - HTTP request logger
 
 ### Development
@@ -570,12 +571,24 @@ throw new ApiError(400, "Invalid input");
 
 ## 📊 Logging
 
-Logs are structured JSON format using Pino:
+Logs are structured JSON format using Pino with BetterStack (Logtail) integration:
 
 ```javascript
 logger.info("User logged in", { userId: user._id });
 logger.error({ error }, "Database connection failed");
 logger.fatal({ error }, "Critical system failure");
+```
+
+**BetterStack Integration:**
+- Centralized log management and monitoring
+- Real-time log streaming
+- Advanced search and filtering
+- Log retention and analysis
+- Alerts and notifications
+
+Configure your BetterStack source token in `.env`:
+```env
+LOGTAIL_SOURCE_TOKEN=your_betterstack_source_token_here
 ```
 
 ## 🤝 Contributing
@@ -602,6 +615,7 @@ This project is licensed under the ISC License.
 - MongoDB documentation
 - Redis documentation
 - Kafka documentation
+- BetterStack for logging infrastructure
 
 ## 📧 Support
 
@@ -609,4 +623,3 @@ For support, email nakulkejriwal124@gmail.com or open an issue on GitHub.
 
 ---
 
-**Note**: Remember to change all default secrets and passwords in production!

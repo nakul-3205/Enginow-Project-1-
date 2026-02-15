@@ -1,0 +1,697 @@
+openapi: 3.0.3
+info:
+  title: Auth-system API
+  description: |
+    Authentication and user management API for admin and end-user flows. 
+    This API provides core endpoints for signup, login, email/OTP verification, 
+    token refresh, session inspection, logout, and user management.
+    
+    ## Features
+    - JWT-based authentication with access and refresh tokens
+    - Email verification via OTP
+    - Role-based access control (User/Admin)
+    - Secure password hashing
+    - Token refresh mechanism
+    - Session management
+    
+    ## Typical Workflow
+    1. **User/Admin Registration** - Call signup endpoint
+    2. **Account Verification** - Verify email with OTP
+    3. **Login** - Authenticate and receive tokens
+    4. **Access Protected Resources** - Use access token in Authorization header
+    5. **Token Refresh** - Refresh expired access tokens
+    6. **Logout** - Invalidate session
+    
+    ## Authentication
+    Protected endpoints require JWT access token:
+    ```
+    Authorization: Bearer <access_token>
+    ```
+    
+  version: 1.0.0
+  contact:
+    name: Nakul
+    email: nakulkejriwal246@gmail.com
+  license:
+    name: ISC
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local Development Server
+  - url: https://api.yourapp.com/api/v1
+    description: Production Server
+
+tags:
+  - name: Public
+    description: Public endpoints (no authentication required)
+  - name: Protected
+    description: Protected endpoints (authentication required)
+  - name: Admin
+    description: Admin-only operations
+
+paths:
+  /auth/signup:
+    post:
+      summary: User Signup
+      description: |
+        Register a new user account. An OTP will be sent to the provided email for verification.
+        This endpoint does not require authentication.
+      tags:
+        - Public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+                - roleRequested
+              properties:
+                username:
+                  type: string
+                  minLength: 3
+                  example: nakul_kejriwal
+                  description: Unique username for the account
+                email:
+                  type: string
+                  format: email
+                  example: nakulkejriwal359@gmail.com
+                  description: Valid email address
+                password:
+                  type: string
+                  format: password
+                  minLength: 8
+                  example: SecurePass123!
+                  description: Strong password (min 8 characters)
+                roleRequested:
+                  type: string
+                  enum: [user, admin]
+                  example: user
+                  description: Requested role (admin requires admin secret)
+                adminSecret:
+                  type: string
+                  description: Required only when roleRequested is "admin"
+      responses:
+        '201':
+          description: User registered successfully. Verification OTP sent to email.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupResponse'
+              example:
+                statusCode: 201
+                data:
+                  userId: "6991911e2ad6c656b7bef45e"
+                message: "User registered. Verification OTP sent."
+                success: true
+        '400':
+          description: Bad Request - Invalid input or user already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                statusCode: 400
+                data: null
+                message: "User already exists"
+                success: false
+                errors: []
+        '403':
+          description: Forbidden - Invalid admin secret
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/verify:
+    post:
+      summary: Verify Email with OTP
+      description: |
+        Verify user's email address using the OTP sent during signup.
+        Upon successful verification, access and refresh tokens are issued.
+        This endpoint does not require authentication.
+      tags:
+        - Public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - otp
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: nakulkejriwal359@gmail.com
+                otp:
+                  type: string
+                  pattern: '^\d{6}$'
+                  example: "123456"
+                  description: 6-digit OTP received via email
+      responses:
+        '200':
+          description: OTP verified successfully, tokens issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Invalid or expired OTP
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                statusCode: 400
+                data: null
+                message: "Invalid or expired OTP"
+                success: false
+                errors: []
+
+  /auth/login:
+    post:
+      summary: User Login
+      description: |
+        Authenticate user with email and password. Returns JWT access and refresh tokens.
+        This endpoint does not require authentication.
+      tags:
+        - Public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: nakulkejriwal246@gmail.com
+                password:
+                  type: string
+                  format: password
+                  example: SecurePassword123
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+              example:
+                statusCode: 200
+                data:
+                  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OTE5MDQ4MmFkNmM2NTZiN2JlZjQ1NCIsImlhdCI6MTc3MTE0NzU0MCwiZXhwIjoxNzcxMTQ4NDQwfQ.lcTV8DS_xEp7oHjlHOZbUz9eH1yKVlmrraTEF6fnG10"
+                  refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OTE5MDQ4MmFkNmM2NTZiN2JlZjQ1NCIsImlhdCI6MTc3MTE0NzU0MCwiZXhwIjoxNzcxNzUyMzQwfQ.KhHqDEW4VtidFSqwMDJ2QSfcSIK7u87b0eLjRaQt-0c"
+                  user:
+                    id: "699190482ad6c656b7bef454"
+                    username: "nakul_admin"
+                message: "Login successful"
+                success: true
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                statusCode: 401
+                data: null
+                message: "Invalid credentials"
+                success: false
+                errors: []
+        '403':
+          description: Account not verified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                statusCode: 403
+                data: null
+                message: "Account not verified"
+                success: false
+                errors: []
+
+  /auth/refresh-token:
+    post:
+      summary: Refresh Access Token
+      description: |
+        Generate a new pair of access and refresh tokens using a valid refresh token.
+        The old refresh token will be invalidated.
+      tags:
+        - Public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - token
+              properties:
+                token:
+                  type: string
+                  description: Valid refresh token
+                  example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+      responses:
+        '200':
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TokenPair'
+        '401':
+          description: Refresh token is required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Invalid or expired refresh token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/me:
+    get:
+      summary: Get Current User Profile
+      description: |
+        Retrieve the authenticated user's profile information.
+        Requires valid access token in Authorization header.
+      tags:
+        - Protected
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile fetched successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/User'
+              example:
+                statusCode: 200
+                data:
+                  _id: "699190482ad6c656b7bef454"
+                  username: "nakul_admin"
+                  email: "nakulkejriwal246@gmail.com"
+                  role: "admin"
+                  isVerified: true
+                  createdAt: "2024-02-15T10:30:00.000Z"
+                  updatedAt: "2024-02-15T10:30:00.000Z"
+                message: "User profile fetched"
+                success: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/logout:
+    post:
+      summary: Logout User
+      description: |
+        Logout the current user by invalidating their refresh token.
+        The access token will remain valid until it expires (15 minutes).
+        Requires valid access token in Authorization header.
+      tags:
+        - Protected
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Logged out successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+              example:
+                statusCode: 200
+                data: null
+                message: "Logged out"
+                success: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/users:
+    get:
+      summary: List All Users
+      description: |
+        Retrieve a paginated list of all users. Results are cached in Redis.
+        Admin-only endpoint - requires admin role.
+      tags:
+        - Admin
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number
+          example: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+          description: Number of users per page
+          example: 10
+      responses:
+        '200':
+          description: Users fetched successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          data:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/User'
+                          total:
+                            type: integer
+                            description: Total number of users
+                          page:
+                            type: integer
+                            description: Current page number
+              example:
+                statusCode: 200
+                data:
+                  data:
+                    - _id: "699190482ad6c656b7bef454"
+                      username: "nakul_admin"
+                      email: "nakulkejriwal246@gmail.com"
+                      role: "admin"
+                      isVerified: true
+                      createdAt: "2024-02-15T10:30:00.000Z"
+                      updatedAt: "2024-02-15T10:30:00.000Z"
+                  total: 25
+                  page: 1
+                message: "Users fetched successfully"
+                success: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /auth/users/{id}:
+    put:
+      summary: Update User
+      description: |
+        Update user information. Users can update their own profile.
+        Admins can update any user's profile.
+      tags:
+        - Protected
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: User ID
+          example: "699190482ad6c656b7bef454"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  minLength: 3
+                  example: new_username
+                email:
+                  type: string
+                  format: email
+                  example: newemail@example.com
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      summary: Delete User
+      description: |
+        Permanently delete a user account. Admin-only operation.
+        The user's refresh token will also be invalidated.
+      tags:
+        - Admin
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: User ID
+          example: "699190482ad6c656b7bef454"
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+              example:
+                statusCode: 200
+                data: null
+                message: "User deleted"
+                success: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT access token obtained from login or verification.
+        
+        Example: `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`
+
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "699190482ad6c656b7bef454"
+        username:
+          type: string
+          example: "nakul_admin"
+        email:
+          type: string
+          format: email
+          example: "nakulkejriwal246@gmail.com"
+        role:
+          type: string
+          enum: [user, admin]
+          example: "admin"
+        isVerified:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-02-15T10:30:00.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-02-15T10:30:00.000Z"
+
+    TokenPair:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: JWT access token (expires in 15 minutes)
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OTE5MDQ4MmFkNmM2NTZiN2JlZjQ1NCIsImlhdCI6MTc3MTE0NzU0MCwiZXhwIjoxNzcxMTQ4NDQwfQ.lcTV8DS_xEp7oHjlHOZbUz9eH1yKVlmrraTEF6fnG10"
+        refreshToken:
+          type: string
+          description: JWT refresh token (expires in 7 days)
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OTE5MDQ4MmFkNmM2NTZiN2JlZjQ1NCIsImlhdCI6MTc3MTE0NzU0MCwiZXhwIjoxNzcxNzUyMzQwfQ.KhHqDEW4VtidFSqwMDJ2QSfcSIK7u87b0eLjRaQt-0c"
+
+    LoginResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        data:
+          type: object
+          properties:
+            accessToken:
+              type: string
+            refreshToken:
+              type: string
+            user:
+              type: object
+              properties:
+                id:
+                  type: string
+                username:
+                  type: string
+        message:
+          type: string
+          example: "Login successful"
+        success:
+          type: boolean
+          example: true
+
+    SignupResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 201
+        data:
+          type: object
+          properties:
+            userId:
+              type: string
+              example: "6991911e2ad6c656b7bef45e"
+        message:
+          type: string
+          example: "User registered. Verification OTP sent."
+        success:
+          type: boolean
+          example: true
+
+    ApiResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        data:
+          type: object
+          nullable: true
+        message:
+          type: string
+          example: "Operation successful"
+        success:
+          type: boolean
+          example: true
+
+    ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 400
+        data:
+          type: object
+          nullable: true
+        message:
+          type: string
+          example: "Error message"
+        success:
+          type: boolean
+          example: false
+        errors:
+          type: array
+          items:
+            type: string
+          example: []
+
+  responses:
+    Unauthorized:
+      description: Unauthorized - Missing or invalid authentication token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            statusCode: 401
+            data: null
+            message: "Unauthorized"
+            success: false
+            errors: []
+
+    Forbidden:
+      description: Forbidden - Insufficient permissions (admin access required)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            statusCode: 403
+            data: null
+            message: "Access denied. Admin privileges required."
+            success: false
+            errors: []
+
+    NotFound:
+      description: Not Found - Resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            statusCode: 404
+            data: null
+            message: "User not found"
+            success: false
+            errors: []
+
+    TooManyRequests:
+      description: Too Many Requests - Rate limit exceeded (100 requests per 15 minutes)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+          example:
+            message: "Error!! Too many requests detected! Please try later"
